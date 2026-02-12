@@ -395,4 +395,173 @@ void main() {
     expect(find.textContaining('Are you sure you want to delete'), findsOneWidget);
     expect(find.textContaining('This action cannot be undone'), findsOneWidget);
   });
+
+  testWidgets('Action buttons are hidden when showActionButtons is false', (WidgetTester tester) async {
+    final session = TrainingSessionDefinition(
+      title: 'Test Session',
+      ftmsMachineType: DeviceType.rower,
+      intervals: <UnitTrainingInterval>[
+        UnitTrainingInterval(
+          title: 'Main',
+          duration: 300,
+          targets: {},
+        ),
+      ],
+      isCustom: true,
+    );
+
+    await tester.pumpWidget(MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(
+        body: TrainingSessionExpansionPanelList(
+          sessions: [session],
+          scrollController: ScrollController(),
+          userSettings: createTestUserSettings(),
+          configs: createTestConfigs(),
+          showActionButtons: false,
+        ),
+      ),
+    ));
+
+    // Expand the panel
+    await tester.tap(find.text('Test Session'));
+    await tester.pumpAndSettle();
+
+    // Verify action buttons are not present
+    expect(find.byTooltip('Duplicate'), findsNothing);
+    expect(find.byTooltip('Edit'), findsNothing);
+    expect(find.byTooltip('Delete'), findsNothing);
+
+    // Verify start button is still present
+    expect(find.byIcon(Icons.play_arrow), findsWidgets);
+  });
+
+  testWidgets('Action buttons are shown when showActionButtons is true (default)', (WidgetTester tester) async {
+    final session = TrainingSessionDefinition(
+      title: 'Custom Session',
+      ftmsMachineType: DeviceType.rower,
+      intervals: <UnitTrainingInterval>[
+        UnitTrainingInterval(
+          title: 'Main',
+          duration: 300,
+          targets: {},
+        ),
+      ],
+      isCustom: true,
+    );
+
+    await tester.pumpWidget(MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(
+        body: TrainingSessionExpansionPanelList(
+          sessions: [session],
+          scrollController: ScrollController(),
+          userSettings: createTestUserSettings(),
+          configs: createTestConfigs(),
+          showActionButtons: true,
+        ),
+      ),
+    ));
+
+    // Expand the panel
+    await tester.tap(find.text('Custom Session'));
+    await tester.pumpAndSettle();
+
+    // Verify action buttons are present
+    expect(find.byTooltip('Duplicate'), findsOneWidget);
+    expect(find.byTooltip('Edit'), findsOneWidget);
+    expect(find.byTooltip('Delete'), findsOneWidget);
+
+    // Verify start button is also present
+    expect(find.byIcon(Icons.play_arrow), findsWidgets);
+  });
+
+  testWidgets('Only duplicate button shown for built-in sessions when showActionButtons is true', (WidgetTester tester) async {
+    final session = TrainingSessionDefinition(
+      title: 'Built-In Session',
+      ftmsMachineType: DeviceType.rower,
+      intervals: <UnitTrainingInterval>[
+        UnitTrainingInterval(
+          title: 'Main',
+          duration: 300,
+          targets: {},
+        ),
+      ],
+      isCustom: false,
+    );
+
+    await tester.pumpWidget(MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(
+        body: TrainingSessionExpansionPanelList(
+          sessions: [session],
+          scrollController: ScrollController(),
+          userSettings: createTestUserSettings(),
+          configs: createTestConfigs(),
+          showActionButtons: true,
+        ),
+      ),
+    ));
+
+    // Expand the panel
+    await tester.tap(find.text('Built-In Session'));
+    await tester.pumpAndSettle();
+
+    // For built-in sessions, only duplicate button should be shown
+    expect(find.byTooltip('Duplicate'), findsOneWidget);
+    expect(find.byTooltip('Edit'), findsNothing);
+    expect(find.byTooltip('Delete'), findsNothing);
+
+    // Verify start button is also present
+    expect(find.byIcon(Icons.play_arrow), findsWidgets);
+  });
+
+  testWidgets('onSessionEdit callback is called when showActionButtons is true and edit button is tapped', (WidgetTester tester) async {
+    bool editButtonPressed = false;
+
+    final session = TrainingSessionDefinition(
+      title: 'Custom Session',
+      ftmsMachineType: DeviceType.rower,
+      intervals: <UnitTrainingInterval>[
+        UnitTrainingInterval(
+          title: 'Main',
+          duration: 300,
+          targets: {},
+        ),
+      ],
+      isCustom: true,
+    );
+
+    await tester.pumpWidget(MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(
+        body: TrainingSessionExpansionPanelList(
+          sessions: [session],
+          scrollController: ScrollController(),
+          userSettings: createTestUserSettings(),
+          configs: createTestConfigs(),
+          showActionButtons: true,
+          onSessionEdit: (_) {
+            editButtonPressed = true;
+          },
+        ),
+      ),
+    ));
+
+    // Expand the panel
+    await tester.tap(find.text('Custom Session'));
+    await tester.pumpAndSettle();
+
+    // Tap the edit button
+    await tester.tap(find.byTooltip('Edit'));
+    await tester.pumpAndSettle();
+
+    // Verify callback was called
+    expect(editButtonPressed, true);
+  });
 }
+

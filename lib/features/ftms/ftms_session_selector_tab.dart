@@ -316,6 +316,7 @@ class _FTMSessionSelectorTabState extends State<FTMSessionSelectorTab> {
       userSettings: _state.userSettings,
       configs: _state.configs,
       onSessionSelected: _onTrainingSessionSelected,
+      showActionButtons: false,
     );
   }
 

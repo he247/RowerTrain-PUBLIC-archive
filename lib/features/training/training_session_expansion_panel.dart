@@ -21,6 +21,7 @@ class TrainingSessionExpansionPanelList extends StatefulWidget {
   final Function(TrainingSessionDefinition)? onSessionEdit;
   final Function(TrainingSessionDefinition)? onSessionDelete;
   final Function(TrainingSessionDefinition)? onSessionDuplicate;
+  final bool showActionButtons;
 
   const TrainingSessionExpansionPanelList({
     super.key,
@@ -32,6 +33,7 @@ class TrainingSessionExpansionPanelList extends StatefulWidget {
     this.onSessionEdit,
     this.onSessionDelete,
     this.onSessionDuplicate,
+    this.showActionButtons = true,
   });
 
   @override
@@ -181,42 +183,50 @@ class _TrainingSessionExpansionPanelListState
             ),
           ),
           const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              // Add duplicate button for all sessions
-              IconButton(
-                icon: const Icon(Icons.content_copy, size: 16),
-                tooltip: AppLocalizations.of(context)!.duplicate,
-                onPressed: () {
-                  _showDuplicateConfirmationDialog(context, session);
-                },
-              ),
-              const SizedBox(width: 8),
-              // Add edit and delete buttons for custom sessions
-              if (session.isCustom) ...[
+          if (widget.showActionButtons)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                // Add duplicate button for all sessions
                 IconButton(
-                  icon: const Icon(Icons.edit, size: 16),
-                  tooltip: AppLocalizations.of(context)!.edit,
+                  icon: const Icon(Icons.content_copy, size: 16),
+                  tooltip: AppLocalizations.of(context)!.duplicate,
                   onPressed: () {
-                    if (widget.onSessionEdit != null) {
-                      widget.onSessionEdit!(session);
-                    }
+                    _showDuplicateConfirmationDialog(context, session);
                   },
                 ),
                 const SizedBox(width: 8),
-                IconButton(
-                  icon: const Icon(Icons.delete, size: 16, color: Colors.red),
-                  tooltip: AppLocalizations.of(context)!.delete,
-                  onPressed: () {
-                    _showDeleteConfirmationDialog(context, session);
-                  },
-                ),
-                const SizedBox(width: 8),
+                // Add edit and delete buttons for custom sessions
+                if (session.isCustom) ...[
+                  IconButton(
+                    icon: const Icon(Icons.edit, size: 16),
+                    tooltip: AppLocalizations.of(context)!.edit,
+                    onPressed: () {
+                      if (widget.onSessionEdit != null) {
+                        widget.onSessionEdit!(session);
+                      }
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  IconButton(
+                    icon: const Icon(Icons.delete, size: 16, color: Colors.red),
+                    tooltip: AppLocalizations.of(context)!.delete,
+                    onPressed: () {
+                      _showDeleteConfirmationDialog(context, session);
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                ],
+                _buildStartSessionButton(context, session),
               ],
-              _buildStartSessionButton(context, session),
-            ],
-          ),
+            )
+          else
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _buildStartSessionButton(context, session),
+              ],
+            ),
         ],
       ),
     );
