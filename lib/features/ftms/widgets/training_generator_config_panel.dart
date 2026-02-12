@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../training/model/rower_workout_type.dart';
 import '../models/session_selector_state.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../core/widgets/purchase_gated_button.dart';
+import '../../../core/services/in_app_purchase_service.dart';
 import 'duration_distance_picker.dart';
 import 'resistance_level_control.dart';
 
@@ -28,6 +30,9 @@ class TrainingGeneratorConfigPanel extends StatelessWidget {
   /// Callback when start button is pressed
   final VoidCallback onStart;
 
+  /// In-app purchase service (injectable for testing)
+  final InAppPurchaseService? inAppPurchaseService;
+
   const TrainingGeneratorConfigPanel({
     super.key,
     required this.config,
@@ -37,6 +42,7 @@ class TrainingGeneratorConfigPanel extends StatelessWidget {
     required this.onResistanceChanged,
     required this.onStart,
     this.resistanceController,
+    this.inAppPurchaseService,
   });
 
   @override
@@ -89,10 +95,13 @@ class TrainingGeneratorConfigPanel extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           
-          // Start Button
-          ElevatedButton(
-            onPressed: config.isResistanceLevelValid ? onStart : null,
-            child: Text(AppLocalizations.of(context)!.start),
+          // Start Button (gated by IAP on Apple platforms)
+          PurchaseGatedButton(
+            service: inAppPurchaseService,
+            child: ElevatedButton(
+              onPressed: config.isResistanceLevelValid ? onStart : null,
+              child: Text(AppLocalizations.of(context)!.start),
+            ),
           ),
         ],
       ),

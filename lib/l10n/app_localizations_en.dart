@@ -465,7 +465,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get startSession => 'Start Session';
+  String get startSession => 'Start';
 
   @override
   String get notConnected => 'Not connected';
@@ -898,4 +898,40 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get developerModeRequiredDescription =>
       'This device requires developer mode to be enabled. Please enable developer mode in the settings to view device data and features.';
+
+  @override
+  String get unlockTrainingSessions => 'Unlock Training Sessions';
+
+  @override
+  String get unlockTrainingSessionsDescription =>
+      'Purchase to unlock the training session generator and all saved training sessions.';
+
+  @override
+  String purchaseFor(String price) {
+    return 'Unlock for $price';
+  }
+
+  @override
+  String get purchaseNotAvailable => 'Purchase not available';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
+
+  @override
+  String get purchaseRestored => 'Purchases restored successfully!';
+
+  @override
+  String get purchaseRestoredNotFound => 'No previous purchases found';
+
+  @override
+  String get purchaseFailed => 'Purchase failed. Please try again.';
+
+  @override
+  String get restoringPurchases => 'Restoring purchases...';
+
+  @override
+  String get featureLocked => 'This feature requires a one-time purchase';
+
+  @override
+  String get unlockFeature => 'Unlock';
 }

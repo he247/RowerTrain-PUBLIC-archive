@@ -131,7 +131,7 @@
   "duplicatingSession": "Duplicating session...",
   "sessionDuplicated": "Session \"{title}\" duplicated successfully!",
   "failedToDuplicateSession": "Failed to duplicate session: {error}",
-  "startSession": "Start Session",
+  "startSession": "Start",
   "notConnected": "Not connected",
   "failedToLoadSession": "Failed to load session",
   "congratulations": "Congratulations!",
@@ -271,5 +271,23 @@
   "resistanceHelpMachineDescription": "Set the resistance level from 1 to {maxLevel}, actually supported by your machine.",
   "resistanceControlUnavailable": "Use your machine's controls to adjust the resistance",
   "developerModeRequired": "Developer Mode Required",
-  "developerModeRequiredDescription": "This device requires developer mode to be enabled. Please enable developer mode in the settings to view device data and features."
+  "developerModeRequiredDescription": "This device requires developer mode to be enabled. Please enable developer mode in the settings to view device data and features.",
+  "unlockTrainingSessions": "Unlock Training Sessions",
+  "unlockTrainingSessionsDescription": "Purchase to unlock the training session generator and all saved training sessions.",
+  "purchaseFor": "Unlock for {price}",
+  "@purchaseFor": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "purchaseNotAvailable": "Purchase not available",
+  "restorePurchases": "Restore Purchases",
+  "purchaseRestored": "Purchases restored successfully!",
+  "purchaseRestoredNotFound": "No previous purchases found",
+  "purchaseFailed": "Purchase failed. Please try again.",
+  "restoringPurchases": "Restoring purchases...",
+  "featureLocked": "This feature requires a one-time purchase",
+  "unlockFeature": "Unlock"
 }

@@ -889,7 +889,7 @@ abstract class AppLocalizations {
   /// No description provided for @startSession.
   ///
   /// In en, this message translates to:
-  /// **'Start Session'**
+  /// **'Start'**
   String get startSession;
 
   /// No description provided for @notConnected.
@@ -1659,6 +1659,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This device requires developer mode to be enabled. Please enable developer mode in the settings to view device data and features.'**
   String get developerModeRequiredDescription;
+
+  /// No description provided for @unlockTrainingSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock Training Sessions'**
+  String get unlockTrainingSessions;
+
+  /// No description provided for @unlockTrainingSessionsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase to unlock the training session generator and all saved training sessions.'**
+  String get unlockTrainingSessionsDescription;
+
+  /// No description provided for @purchaseFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock for {price}'**
+  String purchaseFor(String price);
+
+  /// No description provided for @purchaseNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase not available'**
+  String get purchaseNotAvailable;
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Purchases'**
+  String get restorePurchases;
+
+  /// No description provided for @purchaseRestored.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases restored successfully!'**
+  String get purchaseRestored;
+
+  /// No description provided for @purchaseRestoredNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous purchases found'**
+  String get purchaseRestoredNotFound;
+
+  /// No description provided for @purchaseFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase failed. Please try again.'**
+  String get purchaseFailed;
+
+  /// No description provided for @restoringPurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Restoring purchases...'**
+  String get restoringPurchases;
+
+  /// No description provided for @featureLocked.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature requires a one-time purchase'**
+  String get featureLocked;
+
+  /// No description provided for @unlockFeature.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get unlockFeature;
 }
 
 class _AppLocalizationsDelegate

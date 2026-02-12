@@ -473,7 +473,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get startSession => 'Sitzung starten';
+  String get startSession => 'Starten';
 
   @override
   String get notConnected => 'Nicht verbunden';
@@ -911,4 +911,41 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get developerModeRequiredDescription =>
       'Dieses Gerät erfordert die Aktivierung des Entwicklermodus. Bitte aktivieren Sie den Entwicklermodus in den Einstellungen, um Gerätedaten und -funktionen anzuzeigen.';
+
+  @override
+  String get unlockTrainingSessions => 'Trainingseinheiten freischalten';
+
+  @override
+  String get unlockTrainingSessionsDescription =>
+      'Kaufen Sie, um den Trainingseinheiten-Generator und alle gespeicherten Trainingseinheiten freizuschalten.';
+
+  @override
+  String purchaseFor(String price) {
+    return 'Freischalten für $price';
+  }
+
+  @override
+  String get purchaseNotAvailable => 'Kauf nicht verfügbar';
+
+  @override
+  String get restorePurchases => 'Käufe wiederherstellen';
+
+  @override
+  String get purchaseRestored => 'Käufe erfolgreich wiederhergestellt!';
+
+  @override
+  String get purchaseRestoredNotFound => 'Keine früheren Käufe gefunden';
+
+  @override
+  String get purchaseFailed =>
+      'Kauf fehlgeschlagen. Bitte versuchen Sie es erneut.';
+
+  @override
+  String get restoringPurchases => 'Käufe werden wiederhergestellt...';
+
+  @override
+  String get featureLocked => 'Diese Funktion erfordert einen einmaligen Kauf';
+
+  @override
+  String get unlockFeature => 'Freischalten';
 }

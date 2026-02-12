@@ -14,6 +14,7 @@ import 'dart:io';
 import 'package:permission_handler/permission_handler.dart' as ph;
 import 'package:in_app_review/in_app_review.dart';
 import '../../core/services/in_app_review_service.dart';
+import '../../core/services/in_app_purchase_service.dart';
 import '../../l10n/app_localizations.dart';
 
 import 'scan_widgets.dart';
@@ -31,6 +32,7 @@ class _ScanPageState extends State<ScanPage> {
   final StravaService _stravaService = StravaService();
   final BluetoothScanService _bluetoothScanService = BluetoothScanService();
   final InAppReviewService _reviewService = InAppReviewService();
+  final InAppPurchaseService _iapService = InAppPurchaseService();
   bool _isConnectingStrava = false;
   String? _stravaStatus;
   StreamSubscription<BluetoothAdapterState>? _adapterStateSubscription;
@@ -53,6 +55,7 @@ class _ScanPageState extends State<ScanPage> {
     _checkAndRequestReview();
     _listenToAdapterState();
     _listenToModeChanges();
+    _iapService.initialize();
   }
 
   @override
@@ -101,6 +104,39 @@ class _ScanPageState extends State<ScanPage> {
 
     await _reviewService.handleReviewCompleted();
     _dismissReviewBanner();
+  }
+
+  Future<void> _handleRestorePurchases() async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    scaffoldMessenger.showSnackBar(
+      SnackBar(content: Text(l10n.restoringPurchases)),
+    );
+
+    await _iapService.restorePurchases();
+
+    // Give a moment for purchase stream to process
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (mounted) {
+      scaffoldMessenger.clearSnackBars();
+      if (_iapService.isTrainingSessionsUnlocked) {
+        scaffoldMessenger.showSnackBar(
+          SnackBar(
+            content: Text(l10n.purchaseRestored),
+            backgroundColor: Colors.green,
+          ),
+        );
+        setState(() {}); // Refresh to hide restore button
+      } else {
+        scaffoldMessenger.showSnackBar(
+          SnackBar(
+            content: Text(l10n.purchaseRestoredNotFound),
+          ),
+        );
+      }
+    }
   }
 
   Future<void> _handleStravaConnection() async {
@@ -402,6 +438,30 @@ class _ScanPageState extends State<ScanPage> {
                   },
                 ),
               ),
+              // Restore Purchases button (Apple platforms only)
+              // Wrapped in StreamBuilder to listen for purchase state changes
+              if (_iapService.isApplePlatform)
+                StreamBuilder<bool>(
+                  stream: _iapService.purchaseStateStream,
+                  initialData: _iapService.isTrainingSessionsUnlocked,
+                  builder: (context, snapshot) {
+                    final isUnlocked = snapshot.data ?? _iapService.isTrainingSessionsUnlocked;
+                    if (isUnlocked) {
+                      return const SizedBox.shrink(); // Hide button when unlocked
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: TextButton.icon(
+                        icon: const Icon(Icons.restore, size: 16),
+                        label: Text(
+                          AppLocalizations.of(context)!.restorePurchases,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        onPressed: _handleRestorePurchases,
+                      ),
+                    );
+                  },
+                ),
               if (_showReviewBanner)
                 Padding(
                   padding: const EdgeInsets.symmetric(

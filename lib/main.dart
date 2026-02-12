@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:ftms/core/services/analytics/analytics_service.dart';
 import 'package:ftms/core/services/devices/flutter_blue_plus_facade_provider.dart';
+import 'package:ftms/core/services/in_app_purchase_service.dart';
 import 'package:ftms/core/services/user_settings_service.dart';
 import 'package:ftms/core/utils/logger.dart';
 import 'package:ftms/core/utils/platform_utils.dart';
@@ -49,6 +50,9 @@ void main() async {
   await SupportedBTDeviceManager().identifyAndConnectExistingDevices();
   
   logger.i('🚀 Starting app with ${SupportedBTDeviceManager().allConnectedDevices.length} connected devices');
+
+  // Initialize in-app purchases (Apple platforms only)
+  await InAppPurchaseService().initialize();
 
   runApp(const MyApp());
 }

@@ -131,7 +131,7 @@
   "duplicatingSession": "Sitzung wird dupliziert...",
   "sessionDuplicated": "Sitzung \"{title}\" erfolgreich dupliziert!",
   "failedToDuplicateSession": "Duplizierung der Sitzung fehlgeschlagen: {error}",
-  "startSession": "Sitzung starten",
+  "startSession": "Starten",
   "notConnected": "Nicht verbunden",
   "failedToLoadSession": "Laden der Sitzung fehlgeschlagen",
   "congratulations": "Herzlichen Glückwunsch!",
@@ -271,5 +271,16 @@
   "resistanceHelpMachineDescription": "Legen Sie die Widerstandsstufe von 1 bis {maxLevel} fest, die von Ihrer Maschine tatsächlich unterstützt wird.",
   "resistanceControlUnavailable": "Verwenden Sie die Steuerelemente Ihres Geräts, um den Widerstand einzustellen",
   "developerModeRequired": "Entwicklermodus Erforderlich",
-  "developerModeRequiredDescription": "Dieses Gerät erfordert die Aktivierung des Entwicklermodus. Bitte aktivieren Sie den Entwicklermodus in den Einstellungen, um Gerätedaten und -funktionen anzuzeigen."
+  "developerModeRequiredDescription": "Dieses Gerät erfordert die Aktivierung des Entwicklermodus. Bitte aktivieren Sie den Entwicklermodus in den Einstellungen, um Gerätedaten und -funktionen anzuzeigen.",
+  "unlockTrainingSessions": "Trainingseinheiten freischalten",
+  "unlockTrainingSessionsDescription": "Kaufen Sie, um den Trainingseinheiten-Generator und alle gespeicherten Trainingseinheiten freizuschalten.",
+  "purchaseFor": "Freischalten für {price}",
+  "purchaseNotAvailable": "Kauf nicht verfügbar",
+  "restorePurchases": "Käufe wiederherstellen",
+  "purchaseRestored": "Käufe erfolgreich wiederhergestellt!",
+  "purchaseRestoredNotFound": "Keine früheren Käufe gefunden",
+  "purchaseFailed": "Kauf fehlgeschlagen. Bitte versuchen Sie es erneut.",
+  "restoringPurchases": "Käufe werden wiederhergestellt...",
+  "featureLocked": "Diese Funktion erfordert einen einmaligen Kauf",
+  "unlockFeature": "Freischalten"
 }

@@ -131,7 +131,7 @@
   "duplicatingSession": "Duplication de la session...",
   "sessionDuplicated": "Session \"{title}\" dupliquée avec succès !",
   "failedToDuplicateSession": "Échec de la duplication de la session : {error}",
-  "startSession": "Démarrer la session",
+  "startSession": "Démarrer",
   "notConnected": "Non connecté",
   "failedToLoadSession": "Échec du chargement de la session",
   "congratulations": "Félicitations !",
@@ -271,5 +271,16 @@
   "resistanceHelpMachineDescription": "Définissez le niveau de résistance de 1 à {maxLevel}, réellement supportée par votre machine.",
   "resistanceControlUnavailable": "Utiliser les commandes de votre machine pour régler la résistance",
   "developerModeRequired": "Mode Développeur Requis",
-  "developerModeRequiredDescription": "Cet appareil nécessite l'activation du mode développeur. Veuillez activer le mode développeur dans les paramètres pour afficher les données et fonctionnalités de l'appareil."
+  "developerModeRequiredDescription": "Cet appareil nécessite l'activation du mode développeur. Veuillez activer le mode développeur dans les paramètres pour afficher les données et fonctionnalités de l'appareil.",
+  "unlockTrainingSessions": "Débloquer les sessions d'entraînement",
+  "unlockTrainingSessionsDescription": "Achetez pour débloquer le générateur de sessions et toutes les sessions d'entraînement sauvegardées.",
+  "purchaseFor": "Débloquer pour {price}",
+  "purchaseNotAvailable": "Achat non disponible",
+  "restorePurchases": "Restaurer les achats",
+  "purchaseRestored": "Achats restaurés avec succès !",
+  "purchaseRestoredNotFound": "Aucun achat précédent trouvé",
+  "purchaseFailed": "Achat échoué. Veuillez réessayer.",
+  "restoringPurchases": "Restauration des achats...",
+  "featureLocked": "Cette fonctionnalité nécessite un achat unique",
+  "unlockFeature": "Débloquer"
 }

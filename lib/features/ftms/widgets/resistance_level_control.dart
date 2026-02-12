@@ -113,7 +113,7 @@ class ResistanceLevelControl extends StatelessWidget {
                   },
                 ),
                 SizedBox(
-                  width: 100,
+                  width: 70,
                   child: TextFormField(
                     controller: controller,
                     decoration: InputDecoration(

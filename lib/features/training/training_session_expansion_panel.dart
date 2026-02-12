@@ -8,6 +8,7 @@ import 'model/training_session.dart';
 import '../../core/config/live_data_display_config.dart';
 import '../../core/services/devices/bt_device.dart';
 import '../../core/services/devices/bt_device_manager.dart';
+import '../../core/widgets/purchase_gated_button.dart';
 import '../../features/training/services/training_session_storage_service.dart';
 import 'widgets/training_session_chart.dart';
 
@@ -396,7 +397,7 @@ class _TrainingSessionExpansionPanelListState
 
         final hasCompatibleDevice = ftmsDevices.isNotEmpty;
 
-        return ElevatedButton.icon(
+        final startButton = ElevatedButton.icon(
           icon: const Icon(Icons.play_arrow, size: 16),
           label: Text(
             hasCompatibleDevice ? AppLocalizations.of(context)!.startSession : AppLocalizations.of(context)!.notConnected,
@@ -412,6 +413,9 @@ class _TrainingSessionExpansionPanelListState
                 }
               : null,
         );
+
+        // Gate the start button behind IAP on Apple platforms
+        return PurchaseGatedButton(child: startButton);
       },
     );
   }
